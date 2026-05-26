@@ -99,3 +99,6 @@ if __name__ == "__main__":
     print(df)
     print("\nCleaned Data:")
     print(cleaned_df)
+a = 12
+b = 5
+print(a+b)
