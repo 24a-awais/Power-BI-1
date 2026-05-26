@@ -1,0 +1,101 @@
+import pandas as pd
+import numpy as np
+from typing import Union, List
+
+class DataCleaner:
+    """A data analytical tool for cleaning data."""
+    
+    def __init__(self, data: Union[pd.DataFrame, str]):
+        """
+        Initialize the DataCleaner with data.
+        
+        Args:
+            data: DataFrame or path to CSV file
+        """
+        if isinstance(data, str):
+            self.df = pd.read_csv(data)
+        else:
+            self.df = data.copy()
+    
+    def remove_duplicates(self, subset: List[str] = None) -> 'DataCleaner':
+        """Remove duplicate rows."""
+        self.df = self.df.drop_duplicates(subset=subset, keep='first')
+        return self
+    
+    def handle_missing_values(self, method: str = 'drop', fill_value = None) -> 'DataCleaner':
+        """
+        Handle missing values.
+        
+        Args:
+            method: 'drop' to remove rows, 'fill' to fill with value
+            fill_value: Value to fill missing data
+        """
+        if method == 'drop':
+            self.df = self.df.dropna()
+        elif method == 'fill':
+            self.df = self.df.fillna(fill_value)
+        elif method == 'mean':
+            self.df = self.df.fillna(self.df.mean(numeric_only=True))
+        return self
+    
+    def remove_outliers(self, column: str, threshold: float = 3) -> 'DataCleaner':
+        """Remove outliers using z-score method."""
+        z_scores = np.abs((self.df[column] - self.df[column].mean()) / self.df[column].std())
+        self.df = self.df[z_scores < threshold]
+        return self
+    
+    def normalize_column(self, column: str) -> 'DataCleaner':
+        """Normalize column to 0-1 range."""
+        col = self.df[column]
+        self.df[column] = (col - col.min()) / (col.max() - col.min())
+        return self
+    
+    def trim_whitespace(self) -> 'DataCleaner':
+        """Remove leading/trailing whitespace from string columns."""
+        string_cols = self.df.select_dtypes(include=['object']).columns
+        for col in string_cols:
+            self.df[col] = self.df[col].str.strip()
+        return self
+    
+    def remove_columns(self, columns: List[str]) -> 'DataCleaner':
+        """Remove specified columns."""
+        self.df = self.df.drop(columns=columns, errors='ignore')
+        return self
+    
+    def convert_dtypes(self, dtype_dict: dict) -> 'DataCleaner':
+        """Convert column data types."""
+        self.df = self.df.astype(dtype_dict, errors='ignore')
+        return self
+    
+    def get_cleaned_data(self) -> pd.DataFrame:
+        """Return the cleaned DataFrame."""
+        return self.df
+    
+    def save_cleaned_data(self, filepath: str) -> None:
+        """Save cleaned data to CSV."""
+        self.df.to_csv(filepath, index=False)
+        print(f"Cleaned data saved to {filepath}")
+
+
+# Example usage
+if __name__ == "__main__":
+    # Create sample data
+    sample_data = {
+        'Name': ['John ', 'Jane', 'John ', 'Bob', None],
+        'Age': [25, 30, 25, 35, 28],
+        'Salary': [50000, 60000, 50000, 100000, 55000]
+    }
+    df = pd.DataFrame(sample_data)
+    
+    # Clean data
+    cleaner = DataCleaner(df)
+    cleaned_df = (cleaner
+                  .trim_whitespace()
+                  .handle_missing_values(method='drop')
+                  .remove_duplicates()
+                  .get_cleaned_data())
+    
+    print("Original Data:")
+    print(df)
+    print("\nCleaned Data:")
+    print(cleaned_df)
