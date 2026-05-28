@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sir Rahim Shah Akhunkhail (RSA) Foundation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --srf-pure-white: #FFFFFF;
+            --srf-off-white: #F8F9FA;
+            --srf-deep-black: #111111;
+            --srf-charcoal: #2A2A2A;
+            --srf-humanitarian-green: #0A5C36;
+            --srf-humanitarian-green-hover: #074326;
+            --srf-emergency-red: #D32F2F;
+            --srf-emergency-red-hover: #B71C1C;
+            --srf-radius: 4px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--srf-pure-white);
+            color: var(--srf-deep-black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Top Utility Bar */
+        .top-bar {
+            background-color: var(--srf-deep-black);
+            color: var(--srf-pure-white);
+            padding: 10px 40px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .top-bar-left { opacity: 0.8; }
+        .top-bar-right a {
+            color: var(--srf-pure-white);
+            text-decoration: none;
+            margin-left: 20px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .top-bar-right a:hover { opacity: 1; color: var(--srf-emergency-red); }
+
+        /* Main Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: var(--srf-pure-white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+            border-bottom: 1px solid var(--srf-off-white);
+        }
+
+        .logo-area h2 {
+            font-size: 20px;
+            color: var(--srf-humanitarian-green);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .logo-area span { color: var(--srf-deep-black); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--srf-deep-black);
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--srf-humanitarian-green);
+        }
+
+        .cta-btn {
+            background-color: var(--srf-emergency-red);
+            color: var(--srf-pure-white) !important;
+            padding: 12px 24px;
+            border-radius: var(--srf-radius);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--srf-emergency-red-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070') center/cover;
+            padding: 160px 40px;
+            text-align: center;
+            color: var(--srf-pure-white);
+        }
+
+        .hero-tag {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--srf-pure-white);
+            background: rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-radius: var(--srf-radius);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            max-width: 900px;
+            margin: 0 auto 25px auto;
+            line-height: 1.15;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 18px);
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+            opacity: 0.9;
+        }
+
+        /* Statistics Grid */
+        .stats-section {
+            background-color: var(--srf-deep-black);
+            padding: 60px 40px;
+            color: var(--srf-pure-white);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-card {
+            border-left: 3px solid var(--srf-humanitarian-green);
+            padding-left: 20px;
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            color: var(--srf-pure-white);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Core Sectors / Programs */
+        .section-container {
+            padding: 100px 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            max-width: 600px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--srf-deep-black);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--srf-charcoal);
+            font-size: 16px;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: var(--srf-off-white);
+            border: 1px solid rgba(0,0,0,0.06);
+            padding: 40px;
+            border-radius: var(--srf-radius);
+            transition: var(--transition);
+        }
+
+        .program-card:hover {
+            background: var(--srf-pure-white);
+            border-color: var(--srf-humanitarian-green);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+
+        .program-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--srf-deep-black);
+        }
+
+        .program-card p {
+            font-size: 14px;
+            color: var(--srf-charcoal);
+            margin-bottom: 20px;
+        }
+
+        .program-link {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--srf-humanitarian-green);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Focus Project Area */
+        .focus-banner {
+            background-color: var(--srf-off-white);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .focus-split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        }
+
+        .focus-img {
+            background: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974') center/cover;
+            min-height: 400px;
+        }
+
+        .focus-content {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .focus-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .focus-content p {
+            color: var(--srf-charcoal);
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* Footer System */
+        footer {
+            background-color: var(--srf-deep-black);
+            color: var(--srf-pure-white);
+            padding: 80px 40px 40px 40px;
+            border-top: 4px solid var(--srf-humanitarian-green);
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--srf-pure-white);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--srf-pure-white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .navbar, .nav-links { flex-direction: column; gap: 20px; text-align: center; }
+            .top-bar { display: none; }
+            .focus-split { grid-template-columns: 1fr; }
+            .focus-content { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            Official Reg: #210/5/9296 (Societies Registration Act XXI of 1860)
+        </div>
+        <div class="top-bar-right">
+            <a href="#volunteer">Volunteer Portal</a>
+            <a href="#reports">Transparency Hub</a>
+            <a href="mailto:admin@sirfoundation.info">admin@sirfoundation.info</a>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo-area">
+            <h2>SIR RSA <span>FOUNDATION</span></h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#reports">Reports</a></li>
+        </ul>
+        <a href="#donate" class="cta-btn">DONATE NOW</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <span class="hero-tag">ESTABLISHED JANUARY 2019</span>
+        <h1>To Please the Creator, We Serve His Creation.</h1>
+        <p>A 100% volunteer-driven humanitarian foundation delivering sustainable livelihood, emergency housing, and critical healthcare infrastructures with absolute structural transparency.</p>
+        <a href="#donate" class="cta-btn" style="padding: 16px 36px; font-size: 16px;">Sponsor Livelihoods Now</a>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Livelihood Businesses Standardized via 'Sir Roozgar'</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Direct Field Allocation (Zero Overhead Leakage)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">60+</div>
+                <div class="stat-label">Artisans Operating in Upper Dir Handicraft Center</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">04+</div>
+                <div class="stat-label">Active Core Districts Across KPK & Punjab</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container" id="programs">
+        <div class="section-header">
+            <h2>Our Core Sectors</h2>
+            <p>Moving away from systemic dependency, we deploy target operational tools that build permanent community self-reliance.</p>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <h3>Sir Roozgar Program</h3>
+                <p>Standardizing micro-enterprises including retail setups, livestock deployment, and commercial sewing units under our strict operating motto: 'Yes to Business, No to Charity.'</p>
+                <a href="#" class="program-link">View Portfolio &rarr;</a>
+            </div>
+            <div class="program-card">
+                <h3>Critical Health Support</h3>
+                <p>Providing urgent operational funding and financial checks for kidney failure patients, oncology cycles, and permanent medical mobility device allocation.</p>
+                <a href="#" class="program-link">View Portfolio &rarr;</a>
+            </div>
+            <div class="program-card">
+                <h3>Educational Equity</h3>
+                <p>Deploying complete off-grid solar infrastructure arrays to unpowered regional institutions and financing multi-semester academic university scholarships.</p>
+                <a href="#" class="program-link">View Portfolio &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="focus-banner" id="projects">
+        <div class="focus-split">
+            <div class="focus-img"></div>
+            <div class="focus-content">
+                <span style="color: var(--srf-emergency-red); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block;">Active Focus Campaign</span>
+                <h2>Dignified Housing Reconstruction — Buner & District Bajaur</h2>
+                <p>Following severe flash floods, temporary aid falls short. Under signed Memorandums of Understanding (MOU) with regional committees, our engineering pipelines are systematically replacing destroyed mud structures with highly permanent, climate-resilient brick houses in high-risk zones like Mamond Valley.</p>
+                <div>
+                    <a href="#donate" class="cta-btn">Sponsor a Resilient Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col" style="grid-column: span 2;">
+                <h4>SIR RSA FOUNDATION</h4>
+                <p>An independent, non-governmental, non-political, and not-for-profit charitable organization registered under the Societies Registration Act XXI of 1860.</p>
+                <p style="opacity: 0.6; font-size: 13px;">Head Office: Akhunkhail House, Mandesh, District Dir Lower, Khyber Pakhtunkhwa, Pakistan.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Core Sectors</h4>
+                <ul>
+                    <li><a href="#">Sir Roozgar Livelihoods</a></li>
+                    <li><a href="#">Healthcare Access</a></li>
+                    <li><a href="#">Education Infrastructure</a></li>
+                    <li><a href="#">Disaster Resettlement</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Transparency</h4>
+                <ul>
+                    <li><a href="#">2025-2026 Audit Report</a></li>
+                    <li><a href="#">Field Image Registry</a></li>
+                    <li><a href="#">MOU Verification Hub</a></li>
+                    <li><a href="#">Volunteer Registry</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Sir Rahim Shah Akhunkhail Foundation. All Rights Reserved.</div>
+            <div>Motto: To please the CREATOR, we serve His CREATION!</div>
+        </div>
+    </footer>
+
+</body>
+</html>
